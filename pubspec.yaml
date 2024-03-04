@@ -1,0 +1,23 @@
+name: flagsync_sdk
+description: Flagsync flutter sdk.
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=3.1.2 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  injectable: ^2.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner:
+  injectable_generator: ^2.4.0
+  json_serializable: ^6.7.1
+
+flutter:
