@@ -1,12 +1,25 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flagsync_sdk/flagsync_sdk.dart';
+import 'basic.dart';
+import 'multi_group.dart';
+import 'multi_type.dart';
+import 'rollout.dart';
+import 'single_group.dart';
 
 void main() {
-  test('adds one to input values', () {
-    final calculator = Calculator();
-    expect(calculator.addOne(2), 3);
-    expect(calculator.addOne(-7), -6);
-    expect(calculator.addOne(0), 1);
+  group('basic', () {
+    basicTests();
+  });
+  group('single_group', () {
+    singleGroupTest();
+  });
+  group('multi_group', () {
+    multiGroupTest();
+  });
+  group('multi_type', () {
+    multiType();
+  });
+  group('rollout', () {
+    rolloutTest();
   });
 }
