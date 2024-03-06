@@ -30,7 +30,6 @@ void rolloutTest() {
             ]),
       ],
       enabled: true,
-      environmentId: '',
     ).toJson();
 
     int numberOfCalls = 0;

@@ -8,14 +8,12 @@ part 'generated/flag_model.freezed.dart';
 class FlagModel with _$FlagModel {
   factory FlagModel(
       {required String clientKey,
-      required String environmentId,
       required bool enabled,
       required bool defaultValue,
       required List<FlagConditionGroupModel> conditions}) = _FlagModel;
 
   factory FlagModel.fromDto(FlagDto dto) => FlagModel(
       clientKey: dto.clientKey,
-      environmentId: dto.environmentId,
       enabled: dto.enabled,
       defaultValue: dto.defaultValue,
       conditions: dto.conditions

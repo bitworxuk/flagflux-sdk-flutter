@@ -55,7 +55,6 @@ void multiType() {
         )
       ],
       enabled: true,
-      environmentId: '',
     ).toJson();
 
     EvaluationResultDto evalResult = flagSync.evaluateFlag(flag, {

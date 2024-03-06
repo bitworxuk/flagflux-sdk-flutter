@@ -21,7 +21,6 @@ FlagDto _$FlagDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$FlagDto {
   String get clientKey => throw _privateConstructorUsedError;
-  String get environmentId => throw _privateConstructorUsedError;
   bool get enabled => throw _privateConstructorUsedError;
   bool get defaultValue => throw _privateConstructorUsedError;
   List<FlagConditionGroupDto> get conditions =>
@@ -39,7 +38,6 @@ abstract class $FlagDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {String clientKey,
-      String environmentId,
       bool enabled,
       bool defaultValue,
       List<FlagConditionGroupDto> conditions});
@@ -59,7 +57,6 @@ class _$FlagDtoCopyWithImpl<$Res, $Val extends FlagDto>
   @override
   $Res call({
     Object? clientKey = null,
-    Object? environmentId = null,
     Object? enabled = null,
     Object? defaultValue = null,
     Object? conditions = null,
@@ -68,10 +65,6 @@ class _$FlagDtoCopyWithImpl<$Res, $Val extends FlagDto>
       clientKey: null == clientKey
           ? _value.clientKey
           : clientKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      environmentId: null == environmentId
-          ? _value.environmentId
-          : environmentId // ignore: cast_nullable_to_non_nullable
               as String,
       enabled: null == enabled
           ? _value.enabled
@@ -98,7 +91,6 @@ abstract class _$$FlagDtoImplCopyWith<$Res> implements $FlagDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {String clientKey,
-      String environmentId,
       bool enabled,
       bool defaultValue,
       List<FlagConditionGroupDto> conditions});
@@ -116,7 +108,6 @@ class __$$FlagDtoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? clientKey = null,
-    Object? environmentId = null,
     Object? enabled = null,
     Object? defaultValue = null,
     Object? conditions = null,
@@ -125,10 +116,6 @@ class __$$FlagDtoImplCopyWithImpl<$Res>
       clientKey: null == clientKey
           ? _value.clientKey
           : clientKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      environmentId: null == environmentId
-          ? _value.environmentId
-          : environmentId // ignore: cast_nullable_to_non_nullable
               as String,
       enabled: null == enabled
           ? _value.enabled
@@ -152,7 +139,6 @@ class __$$FlagDtoImplCopyWithImpl<$Res>
 class _$FlagDtoImpl implements _FlagDto {
   _$FlagDtoImpl(
       {required this.clientKey,
-      required this.environmentId,
       required this.enabled,
       required this.defaultValue,
       required final List<FlagConditionGroupDto> conditions})
@@ -163,8 +149,6 @@ class _$FlagDtoImpl implements _FlagDto {
 
   @override
   final String clientKey;
-  @override
-  final String environmentId;
   @override
   final bool enabled;
   @override
@@ -179,7 +163,7 @@ class _$FlagDtoImpl implements _FlagDto {
 
   @override
   String toString() {
-    return 'FlagDto(clientKey: $clientKey, environmentId: $environmentId, enabled: $enabled, defaultValue: $defaultValue, conditions: $conditions)';
+    return 'FlagDto(clientKey: $clientKey, enabled: $enabled, defaultValue: $defaultValue, conditions: $conditions)';
   }
 
   @override
@@ -189,8 +173,6 @@ class _$FlagDtoImpl implements _FlagDto {
             other is _$FlagDtoImpl &&
             (identical(other.clientKey, clientKey) ||
                 other.clientKey == clientKey) &&
-            (identical(other.environmentId, environmentId) ||
-                other.environmentId == environmentId) &&
             (identical(other.enabled, enabled) || other.enabled == enabled) &&
             (identical(other.defaultValue, defaultValue) ||
                 other.defaultValue == defaultValue) &&
@@ -200,8 +182,8 @@ class _$FlagDtoImpl implements _FlagDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, clientKey, environmentId,
-      enabled, defaultValue, const DeepCollectionEquality().hash(_conditions));
+  int get hashCode => Object.hash(runtimeType, clientKey, enabled, defaultValue,
+      const DeepCollectionEquality().hash(_conditions));
 
   @JsonKey(ignore: true)
   @override
@@ -220,7 +202,6 @@ class _$FlagDtoImpl implements _FlagDto {
 abstract class _FlagDto implements FlagDto {
   factory _FlagDto(
       {required final String clientKey,
-      required final String environmentId,
       required final bool enabled,
       required final bool defaultValue,
       required final List<FlagConditionGroupDto> conditions}) = _$FlagDtoImpl;
@@ -229,8 +210,6 @@ abstract class _FlagDto implements FlagDto {
 
   @override
   String get clientKey;
-  @override
-  String get environmentId;
   @override
   bool get enabled;
   @override

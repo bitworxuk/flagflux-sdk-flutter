@@ -45,7 +45,6 @@ void multiGroupTest() {
         )
       ],
       enabled: true,
-      environmentId: '',
     ).toJson();
 
     EvaluationResultDto evalResult =

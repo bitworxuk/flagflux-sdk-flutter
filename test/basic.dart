@@ -11,7 +11,6 @@ void basicTests() {
       defaultValue: true,
       conditions: [],
       enabled: true,
-      environmentId: '',
     ).toJson();
 
     final evalResult = flagSync.evaluateFlag(flag, {});
@@ -26,7 +25,6 @@ void basicTests() {
       defaultValue: false,
       conditions: [],
       enabled: true,
-      environmentId: '',
     ).toJson();
 
     final evalResult = flagSync.evaluateFlag(flag, {});

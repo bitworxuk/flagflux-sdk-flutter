@@ -31,7 +31,6 @@ void singleGroupTest() {
         )
       ],
       enabled: true,
-      environmentId: '',
     ).toJson();
 
     EvaluationResultDto evalResult =

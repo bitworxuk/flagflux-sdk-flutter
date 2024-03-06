@@ -10,7 +10,6 @@ class FlagDto with _$FlagDto {
   @JsonSerializable(explicitToJson: true)
   factory FlagDto(
       {required String clientKey,
-      required String environmentId,
       required bool enabled,
       required bool defaultValue,
       required List<FlagConditionGroupDto> conditions}) = _FlagDto;

@@ -9,7 +9,6 @@ part of '../flag_dto.dart';
 _$FlagDtoImpl _$$FlagDtoImplFromJson(Map<String, dynamic> json) =>
     _$FlagDtoImpl(
       clientKey: json['clientKey'] as String,
-      environmentId: json['environmentId'] as String,
       enabled: json['enabled'] as bool,
       defaultValue: json['defaultValue'] as bool,
       conditions: (json['conditions'] as List<dynamic>)
@@ -20,7 +19,6 @@ _$FlagDtoImpl _$$FlagDtoImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$FlagDtoImplToJson(_$FlagDtoImpl instance) =>
     <String, dynamic>{
       'clientKey': instance.clientKey,
-      'environmentId': instance.environmentId,
       'enabled': instance.enabled,
       'defaultValue': instance.defaultValue,
       'conditions': instance.conditions.map((e) => e.toJson()).toList(),
