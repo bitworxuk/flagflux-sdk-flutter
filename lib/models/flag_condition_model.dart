@@ -1,6 +1,6 @@
-import 'package:flagsync_sdk/dto/flag_condition_dto.dart';
-import 'package:flagsync_sdk/models/condition.dart';
-import 'package:flagsync_sdk/models/value_type.dart';
+import 'package:flagflux_sdk/dto/flag_condition_dto.dart';
+import 'package:flagflux_sdk/models/condition.dart';
+import 'package:flagflux_sdk/models/value_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'generated/flag_condition_model.freezed.dart';

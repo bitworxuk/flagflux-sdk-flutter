@@ -1,4 +1,4 @@
-enum FlagsyncErrors {
+enum FlagfluxErrors {
   invalidFlagJson,
   invalidPayloadJson,
   typeMismatch,
@@ -6,18 +6,18 @@ enum FlagsyncErrors {
   conditionEvaluationError
 }
 
-extension FlagSyncErrorMessage on FlagsyncErrors {
+extension FlagfluxErrorMessage on FlagfluxErrors {
   String message() {
     switch (this) {
-      case FlagsyncErrors.invalidFlagJson:
+      case FlagfluxErrors.invalidFlagJson:
         return 'INVALID_FLAG_JSON';
-      case FlagsyncErrors.invalidPayloadJson:
+      case FlagfluxErrors.invalidPayloadJson:
         return 'INVALID_PAYLOAD_JSON';
-      case FlagsyncErrors.typeMismatch:
+      case FlagfluxErrors.typeMismatch:
         return 'TYPE_MISMATCH';
-      case FlagsyncErrors.missingJsonKey:
+      case FlagfluxErrors.missingJsonKey:
         return 'JSON_KEY_NOT_FOUND';
-      case FlagsyncErrors.conditionEvaluationError:
+      case FlagfluxErrors.conditionEvaluationError:
         return 'CONDITION_EVALUATION_ERROR';
       default:
         return 'UNKNOWN';

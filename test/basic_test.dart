@@ -1,10 +1,10 @@
-import 'package:flagsync_sdk/dto/flag_dto.dart';
-import 'package:flagsync_sdk/flagsync_sdk.dart';
+import 'package:flagflux_sdk/dto/flag_dto.dart';
+import 'package:flagflux_sdk/flagflux_sdk.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void basicTests() {
+void main() {
   test('No logic on flag', () {
-    final flagSync = FlagSync(enableLogging: true);
+    final flagflux = Flagflux(enableLogging: true);
 
     final flag = FlagDto(
       clientKey: 'flag_1',
@@ -13,12 +13,12 @@ void basicTests() {
       enabled: true,
     ).toJson();
 
-    final evalResult = flagSync.evaluateFlag(flag, {});
+    final evalResult = flagflux.evaluateFlag(flag, {});
     expect(evalResult.enabled, true);
   });
 
   test('No logic off flag', () {
-    final flagSync = FlagSync(enableLogging: true);
+    final flagflux = Flagflux(enableLogging: true);
 
     final flag = FlagDto(
       clientKey: 'flag_1',
@@ -27,7 +27,7 @@ void basicTests() {
       enabled: true,
     ).toJson();
 
-    final evalResult = flagSync.evaluateFlag(flag, {});
+    final evalResult = flagflux.evaluateFlag(flag, {});
     expect(evalResult.enabled, false);
   });
 }

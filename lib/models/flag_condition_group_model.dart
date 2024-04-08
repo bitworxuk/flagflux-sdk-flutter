@@ -1,5 +1,5 @@
-import 'package:flagsync_sdk/dto/flag_condition_group_dto.dart';
-import 'package:flagsync_sdk/models/flag_condition_model.dart';
+import 'package:flagflux_sdk/dto/flag_condition_group_dto.dart';
+import 'package:flagflux_sdk/models/flag_condition_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'generated/flag_condition_group_model.freezed.dart';

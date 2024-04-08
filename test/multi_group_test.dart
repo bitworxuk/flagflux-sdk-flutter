@@ -1,15 +1,15 @@
-import 'package:flagsync_sdk/dto/evaluation_result_dto.dart';
-import 'package:flagsync_sdk/dto/flag_condition_dto.dart';
-import 'package:flagsync_sdk/dto/flag_condition_group_dto.dart';
-import 'package:flagsync_sdk/dto/flag_dto.dart';
-import 'package:flagsync_sdk/flagsync_sdk.dart';
-import 'package:flagsync_sdk/models/condition.dart';
-import 'package:flagsync_sdk/models/value_type.dart';
+import 'package:flagflux_sdk/dto/evaluation_result_dto.dart';
+import 'package:flagflux_sdk/dto/flag_condition_dto.dart';
+import 'package:flagflux_sdk/dto/flag_condition_group_dto.dart';
+import 'package:flagflux_sdk/dto/flag_dto.dart';
+import 'package:flagflux_sdk/flagflux_sdk.dart';
+import 'package:flagflux_sdk/models/condition.dart';
+import 'package:flagflux_sdk/models/value_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void multiGroupTest() {
+void main() {
   test('Logic multi group', () {
-    final flagSync = FlagSync(enableLogging: true);
+    final flagflux = Flagflux(enableLogging: true);
 
     final flag = FlagDto(
       clientKey: 'flag_1',
@@ -48,16 +48,16 @@ void multiGroupTest() {
     ).toJson();
 
     EvaluationResultDto evalResult =
-        flagSync.evaluateFlag(flag, {'string': 'peter', 'number': 10});
+        flagflux.evaluateFlag(flag, {'string': 'peter', 'number': 10});
     expect(evalResult.enabled, true);
 
-    evalResult = flagSync.evaluateFlag(flag, {'string': 'peter', 'number': 5});
+    evalResult = flagflux.evaluateFlag(flag, {'string': 'peter', 'number': 5});
     expect(evalResult.enabled, false);
 
-    evalResult = flagSync.evaluateFlag(flag, {'string': 'value', 'number': 5});
+    evalResult = flagflux.evaluateFlag(flag, {'string': 'value', 'number': 5});
     expect(evalResult.enabled, true);
 
-    evalResult = flagSync.evaluateFlag(flag, {'string': 'value', 'number': 10});
+    evalResult = flagflux.evaluateFlag(flag, {'string': 'value', 'number': 10});
     expect(evalResult.enabled, true);
   });
 }

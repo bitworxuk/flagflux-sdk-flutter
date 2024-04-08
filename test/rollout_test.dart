@@ -1,14 +1,14 @@
-import 'package:flagsync_sdk/dto/flag_condition_dto.dart';
-import 'package:flagsync_sdk/dto/flag_condition_group_dto.dart';
-import 'package:flagsync_sdk/dto/flag_dto.dart';
-import 'package:flagsync_sdk/flagsync_sdk.dart';
-import 'package:flagsync_sdk/models/condition.dart';
-import 'package:flagsync_sdk/models/value_type.dart';
+import 'package:flagflux_sdk/dto/flag_condition_dto.dart';
+import 'package:flagflux_sdk/dto/flag_condition_group_dto.dart';
+import 'package:flagflux_sdk/dto/flag_dto.dart';
+import 'package:flagflux_sdk/flagflux_sdk.dart';
+import 'package:flagflux_sdk/models/condition.dart';
+import 'package:flagflux_sdk/models/value_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void rolloutTest() {
+void main() {
   test('Rollout flag', () {
-    final flagSync = FlagSync(enableLogging: false);
+    final flagflux = Flagflux(enableLogging: false);
     const testPercentage = 30;
 
     final flag = FlagDto(
@@ -35,7 +35,7 @@ void rolloutTest() {
     int numberOfCalls = 0;
     int enabledCount = 0;
     for (int i = 0; i < 100000; i++) {
-      final r = flagSync.evaluateFlag(flag, {});
+      final r = flagflux.evaluateFlag(flag, {});
       if (r.enabled ?? false) {
         enabledCount++;
       }

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flagsync_sdk/models/condition.dart';
+import 'package:flagflux_sdk/models/condition.dart';
 
 class Evaluator {
   static bool evaluateString(

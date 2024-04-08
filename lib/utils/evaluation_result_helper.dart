@@ -1,7 +1,7 @@
-import 'package:flagsync_sdk/dto/evaluation_result_dto.dart';
-import 'package:flagsync_sdk/enum/flagsync_errors.dart';
-import 'package:flagsync_sdk/models/flag_condition_group_model.dart';
-import 'package:flagsync_sdk/models/flag_model.dart';
+import 'package:flagflux_sdk/dto/evaluation_result_dto.dart';
+import 'package:flagflux_sdk/enum/flagflux_errors.dart';
+import 'package:flagflux_sdk/models/flag_condition_group_model.dart';
+import 'package:flagflux_sdk/models/flag_model.dart';
 
 class EvaluationResultHelper {
   EvaluationResultHelper();
@@ -13,7 +13,7 @@ class EvaluationResultHelper {
     _evaluationResult = EvaluationResultDto(isError: false, flagKey: flagKey);
   }
 
-  void setResultError({required FlagsyncErrors error}) {
+  void setResultError({required FlagfluxErrors error}) {
     _evaluationResult = _evaluationResult.copyWith(
         isError: true, errorMessage: error.message());
   }
@@ -23,7 +23,7 @@ class EvaluationResultHelper {
       required FlagConditionGroupModel conditionGroup,
       required bool evaluataionResult,
       required List<EvaluationConditionResultDto> conditionResults,
-      FlagsyncErrors? error}) {
+      FlagfluxErrors? error}) {
     _evaluationResult = _evaluationResult.copyWith(
       isError: error != null,
       errorMessage: error?.message(),

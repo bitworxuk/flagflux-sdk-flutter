@@ -1,4 +1,4 @@
-import 'package:flagsync_sdk/dto/flag_condition_dto.dart';
+import 'package:flagflux_sdk/dto/flag_condition_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'generated/flag_condition_group_dto.freezed.dart';

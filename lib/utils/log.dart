@@ -9,13 +9,13 @@ class Log {
 
   void logError(String message) {
     if (enableLogging) {
-      _logger.e('FlagSync-> $message');
+      _logger.e('Flagflux-> $message');
     }
   }
 
   void logResult(String message) {
     if (enableLogging) {
-      _logger.i('FlagSync-> $message');
+      _logger.i('Flagflux-> $message');
     }
   }
 }

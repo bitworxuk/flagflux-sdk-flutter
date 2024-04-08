@@ -1,21 +1,21 @@
-library flagsync_sdk;
+library flagflux_sdk;
 
 import 'dart:convert';
-import 'package:flagsync_sdk/dto/evaluation_result_dto.dart';
-import 'package:flagsync_sdk/dto/flag_dto.dart';
-import 'package:flagsync_sdk/enum/flagsync_errors.dart';
-import 'package:flagsync_sdk/models/condition.dart';
-import 'package:flagsync_sdk/models/flag_condition_model.dart';
-import 'package:flagsync_sdk/models/flag_model.dart';
-import 'package:flagsync_sdk/models/value_type.dart';
-import 'package:flagsync_sdk/utils/evaluation_result_helper.dart';
-import 'package:flagsync_sdk/utils/evaluator.dart';
-import 'package:flagsync_sdk/utils/log.dart';
-import 'package:flagsync_sdk/utils/utils.dart';
+import 'package:flagflux_sdk/dto/evaluation_result_dto.dart';
+import 'package:flagflux_sdk/dto/flag_dto.dart';
+import 'package:flagflux_sdk/enum/flagflux_errors.dart';
+import 'package:flagflux_sdk/models/condition.dart';
+import 'package:flagflux_sdk/models/flag_condition_model.dart';
+import 'package:flagflux_sdk/models/flag_model.dart';
+import 'package:flagflux_sdk/models/value_type.dart';
+import 'package:flagflux_sdk/utils/evaluation_result_helper.dart';
+import 'package:flagflux_sdk/utils/evaluator.dart';
+import 'package:flagflux_sdk/utils/log.dart';
+import 'package:flagflux_sdk/utils/utils.dart';
 import 'package:tuple/tuple.dart';
 
-class FlagSync {
-  FlagSync({this.enableLogging = false}) {
+class Flagflux {
+  Flagflux({this.enableLogging = false}) {
     _logger = Log(enableLogging: enableLogging);
   }
   final bool enableLogging;
@@ -32,7 +32,7 @@ class FlagSync {
     } catch (e) {
       _logger.logError('flag deserialisation failed');
       evalResultHelper.newEvaluationResult(flagKey: '?');
-      evalResultHelper.setResultError(error: FlagsyncErrors.invalidFlagJson);
+      evalResultHelper.setResultError(error: FlagfluxErrors.invalidFlagJson);
       return evalResultHelper.result;
     }
     evalResultHelper.newEvaluationResult(flagKey: flag.clientKey);
@@ -41,7 +41,7 @@ class FlagSync {
       jsonEncode(payloadJson);
     } catch (e) {
       _logger.logError('payload invalid json');
-      evalResultHelper.setResultError(error: FlagsyncErrors.invalidPayloadJson);
+      evalResultHelper.setResultError(error: FlagfluxErrors.invalidPayloadJson);
       return evalResultHelper.result;
     }
 
@@ -80,7 +80,7 @@ class FlagSync {
           conditionGroup: conditionGroup,
           evaluataionResult: groupConditionsMet,
           conditionResults: conditionResults,
-          error: groupError ? FlagsyncErrors.conditionEvaluationError : null);
+          error: groupError ? FlagfluxErrors.conditionEvaluationError : null);
 
       if (groupConditionsMet) {
         _logger
@@ -122,7 +122,7 @@ class FlagSync {
         payload[jsonKey] == null) {
       _logger.logError('No key with $jsonKey found in payload');
       return conditionResult.copyWith(
-          isError: true, errorMessage: FlagsyncErrors.missingJsonKey.message());
+          isError: true, errorMessage: FlagfluxErrors.missingJsonKey.message());
     }
 
     Tuple3? castResult;
@@ -156,7 +156,7 @@ class FlagSync {
       _logger.logError(
           '$jsonKey could not be cast to type of ${jsonValueType.valueType}');
       return conditionResult.copyWith(
-          isError: true, errorMessage: FlagsyncErrors.typeMismatch.message());
+          isError: true, errorMessage: FlagfluxErrors.typeMismatch.message());
     }
 
     _logger.logResult(
