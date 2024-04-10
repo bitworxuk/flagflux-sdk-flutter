@@ -1,15 +1,18 @@
 library flagflux_sdk;
 
 import 'dart:convert';
+import 'package:collection/collection.dart';
 import 'package:flagflux_sdk/dto/evaluation_result_dto.dart';
 import 'package:flagflux_sdk/dto/flag_dto.dart';
+import 'package:flagflux_sdk/dto/flag_response_dto.dart';
 import 'package:flagflux_sdk/enum/flagflux_errors.dart';
 import 'package:flagflux_sdk/models/condition.dart';
 import 'package:flagflux_sdk/models/flag_condition_model.dart';
 import 'package:flagflux_sdk/models/flag_model.dart';
 import 'package:flagflux_sdk/models/value_type.dart';
-import 'package:flagflux_sdk/utils/evaluation_result_helper.dart';
-import 'package:flagflux_sdk/utils/evaluator.dart';
+import 'package:flagflux_sdk/sdk/evaluation_result_helper.dart';
+import 'package:flagflux_sdk/sdk/evaluator.dart';
+import 'package:flagflux_sdk/sdk/network.dart';
 import 'package:flagflux_sdk/utils/log.dart';
 import 'package:flagflux_sdk/utils/utils.dart';
 import 'package:tuple/tuple.dart';
@@ -20,30 +23,49 @@ class Flagflux {
   }
   final bool enableLogging;
   final EvaluationResultHelper evalResultHelper = EvaluationResultHelper();
+
+  late final List<FlagDto> flags;
+  late Map<String, dynamic> context;
   late final Log _logger;
 
-  EvaluationResultDto evaluateFlag(
-      Map<String, dynamic> flagJson, Map<String, dynamic> payloadJson) {
+  Future<bool> init(
+      {required String apiKey, Map<String, dynamic>? flagJson}) async {
+    try {
+      Map<String, dynamic>? responseJson = flagJson;
+      if (flagJson == null) {
+        final response = await fetchFlags(apiKey: apiKey);
+        responseJson = jsonDecode(response);
+      }
+      flags = FlagResponseDto.fromJson(responseJson!).flags;
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  void setContext({required Map<String, dynamic> context}) {
+    this.context = context;
+  }
+
+  EvaluationResultDto isFeatureEnabled({required String flagKey}) {
     FlagModel? flag;
+    evalResultHelper.newEvaluationResult(flagKey: '?');
 
     try {
-      final flagDto = FlagDto.fromJson(flagJson);
+      final flagDto = flags.firstWhereOrNull((x) => x.clientKey == flagKey);
+
+      if (flagDto == null) {
+        _logger.logError('flag with key $flagKey not found');
+        evalResultHelper.setResultError(error: FlagfluxErrors.flagNotFound);
+        return evalResultHelper.result;
+      }
       flag = FlagModel.fromDto(flagDto);
     } catch (e) {
       _logger.logError('flag deserialisation failed');
-      evalResultHelper.newEvaluationResult(flagKey: '?');
       evalResultHelper.setResultError(error: FlagfluxErrors.invalidFlagJson);
       return evalResultHelper.result;
     }
     evalResultHelper.newEvaluationResult(flagKey: flag.clientKey);
-
-    try {
-      jsonEncode(payloadJson);
-    } catch (e) {
-      _logger.logError('payload invalid json');
-      evalResultHelper.setResultError(error: FlagfluxErrors.invalidPayloadJson);
-      return evalResultHelper.result;
-    }
 
     if (flag.conditions.isEmpty) {
       evalResultHelper.defaultFlagResult(flag: flag);
@@ -56,7 +78,7 @@ class Flagflux {
       bool groupError = false;
 
       for (final condition in conditionGroup.conditions) {
-        final conditionResult = evaluateCondition(condition, payloadJson);
+        final conditionResult = evaluateCondition(condition, context);
         conditionResults.add(conditionResult);
 
         if (conditionResult.isError) {
